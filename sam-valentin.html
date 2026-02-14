@@ -1,0 +1,119 @@
+<!DOCTYPE html><html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>¿Quieres ser mi Sam Valentín?</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ffd1dc, #cde7ff);
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      overflow: hidden;
+    }.container {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 40px;
+  border-radius: 25px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  backdrop-filter: blur(10px);
+}
+
+h1 {
+  font-size: 2.8rem;
+  color: #ff4f81;
+  margin-bottom: 40px;
+}
+
+.buttons {
+  position: relative;
+  height: 120px;
+}
+
+button {
+  font-size: 1.3rem;
+  padding: 15px 35px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: absolute;
+}
+
+#yesBtn {
+  background: #ff6fa3;
+  color: white;
+  left: 30%;
+  transform: translateX(-50%);
+  box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+}
+
+#noBtn {
+  background: #6fa8ff;
+  color: white;
+  left: 70%;
+  transform: translateX(-50%);
+  box-shadow: 0 5px 15px rgba(100, 149, 237, 0.4);
+}
+
+.full-screen {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 100vw !important;
+  height: 100vh !important;
+  font-size: 3rem !important;
+  border-radius: 0 !important;
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>¿Quieres ser mi Sam Valentín? 💖</h1>
+    <div class="buttons">
+      <button id="yesBtn">SI 💕</button>
+      <button id="noBtn">NO 🙈</button>
+    </div>
+  </div>  <script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+
+    let scale = 1;
+    let attempts = 0;
+
+    document.addEventListener("mousemove", (e) => {
+      const rect = noBtn.getBoundingClientRect();
+      const distance = Math.hypot(
+        e.clientX - (rect.left + rect.width / 2),
+        e.clientY - (rect.top + rect.height / 2)
+      );
+
+      if (distance < 120) {
+        const x = Math.random() * (window.innerWidth - rect.width);
+        const y = Math.random() * (window.innerHeight - rect.height);
+
+        noBtn.style.left = `${x}px`;
+        noBtn.style.top = `${y}px`;
+
+        noBtn.style.transform = "scale(0.8)";
+
+        attempts++;
+        scale += 0.15;
+        yesBtn.style.transform = `scale(${scale})`;
+
+        if (attempts > 6) {
+          yesBtn.classList.add("full-screen");
+          yesBtn.innerHTML = "¡Sabía que dirías que SÍ! 💖";
+        }
+      }
+    });
+
+    yesBtn.addEventListener("click", () => {
+      document.body.innerHTML = "<h1 style='font-size:3rem;text-align:center;color:#ff4f81'>💘 ¡Te amo! 💘</h1>";
+    });
+  </script></body>
+</html>
